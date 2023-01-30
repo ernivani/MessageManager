@@ -8,7 +8,6 @@ import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
@@ -90,14 +89,14 @@ public final class ZondayMessageManager extends Plugin {
         listenThread.start();
     }
 
-    public boolean sendCustomDataToServer(String serverTarget, String cmd) {
+    public boolean sendCustomDataToServer(String serverTarget, String command) {
         ServerInfo targetServer = ProxyServer.getInstance().getServerInfo(serverTarget);
         if (targetServer == null) {
             return false;
         }
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("zonday:main");
-        out.writeUTF(cmd);
+        out.writeUTF(command);
 
         targetServer.sendData("zonday:main", out.toByteArray());
         return true;
