@@ -73,11 +73,12 @@ public final class ZondayMessageManager extends Plugin {
                             command = param.substring(8).replaceAll("%20", " ");
                         }
                     }
+                    Logger.getLogger("Minecraft").info("§b[WebSocket] "+ server + " : " + command);
 
 
                     boolean sended = sendCustomDataToServer(server, command);
                     if (sended) {
-                        Logger.getLogger("Minecraft").info("§a[WebSocket] " + server + " : " + command);
+                        Logger.getLogger("Minecraft").info("§b[WebSocket] Commande envoyée au serveur " + server + " : " + command);
                     } else {
                         Logger.getLogger("Minecraft").info("§c[WebSocket] Erreur survenue lors de l'envoi de la commande au serveur " + server + " : " + command);
                     }
