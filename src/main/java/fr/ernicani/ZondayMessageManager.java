@@ -65,13 +65,15 @@ public final class ZondayMessageManager extends Plugin {
                     String[] params = parts[1].split("&");
                     String server = "";
                     String command = "";
+
                     for (String param : params) {
                         if (param.startsWith("server=")) {
-                            server = param.substring(3).replaceAll("%3A", ":");
+                            server = param.substring(7).replaceAll("%3A", ":");
                         } else if (param.startsWith("command=")) {
                             command = param.substring(8).replaceAll("%20", " ");
                         }
                     }
+                    Logger.getLogger("Minecraft").info("§b[WebSocket] "+ server + " : " + command);
 
 
                     boolean sended = sendCustomDataToServer(server, command);
