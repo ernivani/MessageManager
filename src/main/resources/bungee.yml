@@ -1,0 +1,3 @@
+name: ZondayMessageManager
+version: '${project.version}'
+main: fr.ernicani.ZondayMessageManager
