@@ -22,8 +22,8 @@ public final class ZondayMessageManager extends Plugin {
     public void onEnable() {
         try {
             getProxy().registerChannel("zonday:main");
-            Logger.getLogger("Minecraft").info("§b[WebSocket] Plugin activé !");
             run();
+            Logger.getLogger("Minecraft").info("§b[WebSocket] Plugin activé !");
         }
         catch (Exception e) {
             Logger.getLogger("Minecraft").info("§c[WebSocket] Erreur survenue lors de l'activation du plugin : " + e);
@@ -48,6 +48,7 @@ public final class ZondayMessageManager extends Plugin {
             Logger.getLogger("Minecraft").info("§c[WebSocket] Erreur survenue lors de la création du serveur de socket : " + e);
             return;
         }
+        Logger.getLogger("Minecraft").info("§b[WebSocket] Serveur de socket créé !");
         listenThread = new Thread(() -> {
             try {
                 Thread.sleep(1000);
@@ -72,10 +73,12 @@ public final class ZondayMessageManager extends Plugin {
                         }
                     }
 
-                    if (sendCustomDataToServer(server, command)) {
-                        socket.getOutputStream().write("OK".getBytes());
+
+                    boolean sended = sendCustomDataToServer(server, command);
+                    if (sended) {
+                        Logger.getLogger("Minecraft").info("§b[WebSocket] Commande envoyée au serveur " + server + " : " + command);
                     } else {
-                        socket.getOutputStream().write("KO".getBytes());
+                        Logger.getLogger("Minecraft").info("§c[WebSocket] Erreur survenue lors de l'envoi de la commande au serveur " + server + " : " + command);
                     }
 
                     socket.close();
