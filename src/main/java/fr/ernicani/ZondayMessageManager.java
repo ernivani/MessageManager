@@ -65,6 +65,7 @@ public final class ZondayMessageManager extends Plugin {
                     String[] params = parts[1].split("&");
                     String server = "";
                     String command = "";
+                    String player = "";
 
                     for (String param : params) {
                         if (param.startsWith("server=")) {
@@ -72,11 +73,15 @@ public final class ZondayMessageManager extends Plugin {
                         } else if (param.startsWith("command=")) {
                             command = param.substring(8).replaceAll("%20", " ");
                         }
+                        else if (param.startsWith("player=")) {
+                            player = param.substring(7).replaceAll("%20", " ");
+                        }
                     }
-                    Logger.getLogger("Minecraft").info("§b[WebSocket] "+ server + " : " + command);
+                    Logger.getLogger("Minecraft").info("§b[WebSocket] "+ server + " : " + command + " pour le joueur " + player);
 
+                    String data = "command=" + command + "&player=" + player;
 
-                    boolean sended = sendCustomDataToServer(server, command);
+                    boolean sended = sendCustomDataToServer(server, data);
                     if (sended) {
                         Logger.getLogger("Minecraft").info("§b[WebSocket] Commande envoyée au serveur " + server + " : " + command);
                     } else {
@@ -94,14 +99,14 @@ public final class ZondayMessageManager extends Plugin {
         listenThread.start();
     }
 
-    public boolean sendCustomDataToServer(String serverTarget, String command) {
+    public boolean sendCustomDataToServer(String serverTarget, String data) {
         ServerInfo targetServer = ProxyServer.getInstance().getServerInfo(serverTarget);
         if (targetServer == null) {
             return false;
         }
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("zonday:main");
-        out.writeUTF(command);
+        out.writeUTF(data);
 
         targetServer.sendData("zonday:main", out.toByteArray());
         return true;
