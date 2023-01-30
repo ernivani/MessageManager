@@ -1,7 +1,7 @@
 
 # Zonday Message Manager
 
-Ce plugin bungeecord permet de partager a des serveurs de son arbre des websocket qu'il aura extrait d'un serveur websocket qu'il est 
+Ce plugin bungeecord permet de partager a des serveurs de déja parametré des websocket traduit et via un canal privé
 ## Comment l'utiliser :
 en premier temps il faut créer un générateur de websocket en javascript
 ```javascript
