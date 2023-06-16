@@ -1,5 +1,5 @@
 
-# Zonday Message Manager
+# Message Manager
 
 Ce plugin bungeecord permet de partager a des serveurs de déja parametré des websocket traduit et via un canal privé
 ## Comment l'utiliser :
